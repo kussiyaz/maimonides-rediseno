@@ -7,7 +7,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="welcome-card">
       <div class="welcome-content">
         <div class="welcome-text">
-          <h2 class="welcome-title">¡Hola, Yazmin!</h2>
+          <h2 class="welcome-title" id="welcomeTitle">¡Hola!</h2>
           <p class="welcome-subtitle">Tecnología Multimedial · 3er Año</p>
         </div>
         <div class="welcome-stats">
@@ -316,6 +316,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </article>
     </div>
   </section>
+
+  <script is:inline>
+    (function(){
+      var data = sessionStorage.getItem('usuario');
+      if (data) {
+        try {
+          var user = JSON.parse(data);
+          var titleEl = document.getElementById('welcomeTitle');
+          if (titleEl && user.nombre_corto) {
+            titleEl.textContent = '\u00a1Hola, ' + user.nombre_corto + '!';
+          }
+        } catch(e) {}
+      }
+    })();
+  </script>
 
   <section class="studyplan-section">
     <div class="section-header">

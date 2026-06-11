@@ -197,9 +197,14 @@ const { title, pageTitle, activeNav = 'inicio', hideBackButton = false, sidebarA
           }
           var nameEl = document.querySelector('.sidebar-user-name');
           if (nameEl) nameEl.textContent = user.nombre_completo || nameEl.textContent;
-          var perfilLink = document.querySelector('.profile-btn');
-          if (perfilLink && user.usuario) {
-            perfilLink.href = '/perfil/' + user.usuario;
+          var careerEl = document.querySelector('.sidebar-user-career');
+          if (careerEl) careerEl.textContent = 'Tecnolog\u00eda Multimedial';
+          var profileLinks = document.querySelectorAll('.profile-btn, .bottom-nav a[href*="/perfil/"], .sidebar-nav-item[href*="/perfil/"]');
+          for (var i = 0; i < profileLinks.length; i++) {
+            var href = profileLinks[i].getAttribute('href');
+            if (href && href.indexOf('/perfil/') === 0 && user.usuario) {
+              profileLinks[i].href = '/perfil/' + user.usuario;
+            }
           }
         } catch(e) {}
       }
