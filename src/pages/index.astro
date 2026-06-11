@@ -90,130 +90,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="section-header">
       <h2 class="section-title">
         Cursando
-        <span class="course-count">5 materias</span>
+        <span class="course-count" id="courseCount">0 materias</span>
       </h2>
       <a href="/materias" class="see-all-link">Ver todas</a>
     </div>
-
-    <div class="courses-grid">
-      <a href="/materias/programacion-multimedial-ii" class="course-card course-card-featured">
-        <div class="course-header">
-          <div class="course-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-              <polyline points="16 18 22 12 16 6"/>
-              <polyline points="8 6 2 12 8 18"/>
-            </svg>
-          </div>
-          <span class="course-badge course-badge-active">Cursando</span>
-        </div>
-        <h3 class="course-title">Programación Multimedial II</h3>
-        <p class="course-teacher">Mg. Damián Pereyra</p>
-        <div class="course-progress">
-          <div class="progress-info">
-            <span class="progress-label">Progreso</span>
-            <span class="progress-value">78%</span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 78%;"></div>
-          </div>
-          <span class="progress-detail">7 de 9 unidades</span>
-        </div>
-      </a>
-
-      <a href="/materias/diseno-aplicado" class="course-card">
-        <div class="course-header">
-          <div class="course-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-              <path d="M12 19l7-7 3 3-7 7-3-3z"/>
-              <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
-            </svg>
-          </div>
-          <span class="course-badge course-badge-active">Cursando</span>
-        </div>
-        <h3 class="course-title">Diseño Aplicado</h3>
-        <p class="course-teacher">Lic. Carolina Sánchez</p>
-        <div class="course-progress">
-          <div class="progress-info">
-            <span class="progress-label">Progreso</span>
-            <span class="progress-value">65%</span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 65%;"></div>
-          </div>
-        </div>
-      </a>
-
-      <a href="/materias/produccion-audiovisual" class="course-card">
-        <div class="course-header">
-          <div class="course-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-              <line x1="8" y1="21" x2="16" y2="21"/>
-              <line x1="12" y1="17" x2="12" y2="21"/>
-            </svg>
-          </div>
-          <span class="course-badge course-badge-active">Cursando</span>
-        </div>
-        <h3 class="course-title">Producción Audiovisual</h3>
-        <p class="course-teacher">Lic. Marcos Torres</p>
-        <div class="course-progress">
-          <div class="progress-info">
-            <span class="progress-label">Progreso</span>
-            <span class="progress-value">50%</span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 50%;"></div>
-          </div>
-        </div>
-      </a>
-
-      <a href="/materias/arte-digital-i" class="course-card">
-        <div class="course-header">
-          <div class="course-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-              <path d="M12 20h9"/>
-              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
-            </svg>
-          </div>
-          <span class="course-badge course-badge-active">Cursando</span>
-        </div>
-        <h3 class="course-title">Arte Digital I</h3>
-        <p class="course-teacher">Prof. Lucía Fernández</p>
-        <div class="course-progress">
-          <div class="progress-info">
-            <span class="progress-label">Progreso</span>
-            <span class="progress-value">88%</span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 88%;"></div>
-          </div>
-        </div>
-      </a>
-
-      <a href="/materias/comunicacion-social" class="course-card">
-        <div class="course-header">
-          <div class="course-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/>
-              <line x1="2" y1="12" x2="22" y2="12"/>
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/>
-            </svg>
-          </div>
-          <span class="course-badge course-badge-active">Cursando</span>
-        </div>
-        <h3 class="course-title">Comunicación Social</h3>
-        <p class="course-teacher">Dr. Andrés Ruiz</p>
-        <div class="course-progress">
-          <div class="progress-info">
-            <span class="progress-label">Progreso</span>
-            <span class="progress-value">40%</span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 40%;"></div>
-          </div>
-        </div>
-      </a>
-    </div>
+    <div class="courses-grid" id="coursesGrid"></div>
   </section>
 
   <section class="upcoming-section">
@@ -327,16 +208,44 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <script is:inline>
     (function(){
       var data = sessionStorage.getItem('usuario');
-      if (data) {
-        try {
-          var user = JSON.parse(data);
-          var name = user.nombre_corto || (user.nombre_completo ? user.nombre_completo.split(' ')[0] : null);
-          var titleEl = document.getElementById('welcomeTitle');
-          if (titleEl && name) {
-            titleEl.textContent = '\u00a1Hola, ' + name + '!';
-          }
-        } catch(e) {}
-      }
+      if (!data) return;
+      try {
+        var user = JSON.parse(data);
+        var name = user.nombre_corto || (user.nombre_completo ? user.nombre_completo.split(' ')[0] : null);
+        var titleEl = document.getElementById('welcomeTitle');
+        if (titleEl && name) {
+          titleEl.textContent = '\u00a1Hola, ' + name + '!';
+        }
+        var grid = document.getElementById('coursesGrid');
+        var countEl = document.getElementById('courseCount');
+        if (!grid || !user.materias || !user.materias.length) return;
+        if (countEl) countEl.textContent = user.materias.length + ' materias';
+        for (var i = 0; i < user.materias.length; i++) {
+          var m = user.materias[i];
+          var slug = m.nombre.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+          var badgeClass = 'course-badge-active';
+          var badgeText = 'Cursando';
+          if (m.estado === 'Aprobado') { badgeClass = 'course-badge-completed'; badgeText = 'Aprobado'; }
+          else if (m.estado === 'Recuperatorio') { badgeClass = 'course-badge-upcoming'; badgeText = 'Recuperatorio'; }
+          var nota = typeof m.nota === 'number' ? m.nota : 0;
+          var pct = nota * 10;
+          var card = document.createElement('a');
+          card.className = 'course-card' + (i === 0 ? ' course-card-featured' : '');
+          card.href = '/materias/' + slug;
+          card.innerHTML =
+            '<div class="course-header">' +
+              '<div class="course-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>' +
+              '<span class="course-badge ' + badgeClass + '">' + badgeText + '</span>' +
+            '</div>' +
+            '<h3 class="course-title">' + m.nombre + '</h3>' +
+            '<p class="course-teacher">Nota: ' + nota + '</p>' +
+            '<div class="course-progress">' +
+              '<div class="progress-info"><span class="progress-label">Rendimiento</span><span class="progress-value">' + pct + '%</span></div>' +
+              '<div class="progress-bar"><div class="progress-fill" style="width:' + pct + '%;"></div></div>' +
+            '</div>';
+          grid.appendChild(card);
+        }
+      } catch(e) {}
     })();
   </script>
 
