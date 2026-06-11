@@ -323,9 +323,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       if (data) {
         try {
           var user = JSON.parse(data);
+          var name = user.nombre_corto || (user.nombre_completo ? user.nombre_completo.split(' ')[0] : null);
           var titleEl = document.getElementById('welcomeTitle');
-          if (titleEl && user.nombre_corto) {
-            titleEl.textContent = '\u00a1Hola, ' + user.nombre_corto + '!';
+          if (titleEl && name) {
+            titleEl.textContent = '\u00a1Hola, ' + name + '!';
           }
         } catch(e) {}
       }
