@@ -1,4 +1,7 @@
 ---
+import '../styles/global.css';
+import '../styles/pages.css';
+
 export interface Props {
   title: string;
   pageTitle: string;
@@ -24,8 +27,6 @@ const { title, pageTitle, activeNav = 'inicio', hideBackButton = false, sidebarA
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/src/styles/global.css">
-  <link rel="stylesheet" href="/src/styles/pages.css">
   <style>
     .menu-btn { position: relative; z-index: 10; }
     .back-btn { position: relative; z-index: 10; }
