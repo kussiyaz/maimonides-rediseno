@@ -168,7 +168,7 @@ app.post('/api/login', async (req, res) => {
 // ─── Arranque ───────────────────────────────────────────────────────────────
 
 const PORT = process.env.PORT || 3000;
-const URI  = 'mongodb+srv://yazkussi_db_user:gbaPPKgOfWVgFqIL@cluster0.nulj3zc.mongodb.net/campus_umai?retryWrites=true&w=majority&appName=Cluster0';
+const URI  = process.env.MONGODB_URI || 'mongodb+srv://yazkussi_db_user:gbaPPKgOfWVgFqIL@cluster0.nulj3zc.mongodb.net/campus_umai?retryWrites=true&w=majority&appName=Cluster0';
 
 mongoose
   .connect(URI)
