@@ -1,0 +1,386 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Dashboard" pageTitle="Licenciatura en Tecnología Multimedial" activeNav="inicio" sidebarActive="inicio">
+  <section class="welcome-section">
+    <div class="welcome-card">
+      <div class="welcome-content">
+        <div class="welcome-text">
+          <h2 class="welcome-title">¡Hola, Yazmin!</h2>
+          <p class="welcome-subtitle">Tecnología Multimedial · 3er Año</p>
+        </div>
+        <div class="welcome-stats">
+          <div class="stat-item">
+            <span class="stat-value">72%</span>
+            <span class="stat-label">Cursada</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">2</span>
+            <span class="stat-label">Parciales</span>
+          </div>
+        </div>
+      </div>
+      <div class="welcome-icon">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+          <polyline points="2 17 12 22 22 17"/>
+          <polyline points="2 12 12 17 22 12"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="search-section">
+    <div class="search-container">
+      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="search" class="search-input" placeholder="Buscar materia, recurso..." aria-label="Buscar">
+    </div>
+  </section>
+
+  <section class="today-class-section" id="todayClassSection">
+    <h3 class="section-subtitle">Hoy · <span id="todayDate"></span></h3>
+    <div class="today-class-card" id="todayClassCard">
+      <div class="today-class-content">
+        <div class="today-class-time">
+          <span class="today-class-hour" id="todayClassHour"></span>
+          <span class="today-class-schedule" id="todayClassSchedule"></span>
+        </div>
+        <div class="today-class-info">
+          <h4 class="today-class-name" id="todayClassName"></h4>
+          <p class="today-class-teacher" id="todayClassTeacher"></p>
+          <p class="today-class-location" id="todayClassLocation"></p>
+        </div>
+      </div>
+      <div class="today-class-assignment" id="todayClassAssignment" style="display: none;">
+        <div class="assignment-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+          </svg>
+          <span id="todayAssignmentTitle"></span>
+        </div>
+        <span class="assignment-due" id="todayAssignmentDue"></span>
+      </div>
+    </div>
+    <div class="no-class-card" id="noClassCard" style="display: none;">
+      <div class="no-class-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="4" width="18" height="18" rx="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+      </div>
+      <p class="no-class-text">No tienes clases programadas para hoy</p>
+    </div>
+  </section>
+
+  <section class="courses-section">
+    <div class="section-header">
+      <h2 class="section-title">
+        Cursando
+        <span class="course-count">5 materias</span>
+      </h2>
+      <a href="/materias" class="see-all-link">Ver todas</a>
+    </div>
+
+    <div class="courses-grid">
+      <a href="/materias/programacion-multimedial-ii" class="course-card course-card-featured">
+        <div class="course-header">
+          <div class="course-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
+            </svg>
+          </div>
+          <span class="course-badge course-badge-active">Cursando</span>
+        </div>
+        <h3 class="course-title">Programación Multimedial II</h3>
+        <p class="course-teacher">Mg. Damián Pereyra</p>
+        <div class="course-progress">
+          <div class="progress-info">
+            <span class="progress-label">Progreso</span>
+            <span class="progress-value">78%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 78%;"></div>
+          </div>
+          <span class="progress-detail">7 de 9 unidades</span>
+        </div>
+      </a>
+
+      <a href="/materias/diseno-aplicado" class="course-card">
+        <div class="course-header">
+          <div class="course-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+              <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+            </svg>
+          </div>
+          <span class="course-badge course-badge-active">Cursando</span>
+        </div>
+        <h3 class="course-title">Diseño Aplicado</h3>
+        <p class="course-teacher">Lic. Carolina Sánchez</p>
+        <div class="course-progress">
+          <div class="progress-info">
+            <span class="progress-label">Progreso</span>
+            <span class="progress-value">65%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 65%;"></div>
+          </div>
+        </div>
+      </a>
+
+      <a href="/materias/produccion-audiovisual" class="course-card">
+        <div class="course-header">
+          <div class="course-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+              <line x1="8" y1="21" x2="16" y2="21"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+          </div>
+          <span class="course-badge course-badge-active">Cursando</span>
+        </div>
+        <h3 class="course-title">Producción Audiovisual</h3>
+        <p class="course-teacher">Lic. Marcos Torres</p>
+        <div class="course-progress">
+          <div class="progress-info">
+            <span class="progress-label">Progreso</span>
+            <span class="progress-value">50%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 50%;"></div>
+          </div>
+        </div>
+      </a>
+
+      <a href="/materias/arte-digital-i" class="course-card">
+        <div class="course-header">
+          <div class="course-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M12 20h9"/>
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+            </svg>
+          </div>
+          <span class="course-badge course-badge-active">Cursando</span>
+        </div>
+        <h3 class="course-title">Arte Digital I</h3>
+        <p class="course-teacher">Prof. Lucía Fernández</p>
+        <div class="course-progress">
+          <div class="progress-info">
+            <span class="progress-label">Progreso</span>
+            <span class="progress-value">88%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 88%;"></div>
+          </div>
+        </div>
+      </a>
+
+      <a href="/materias/comunicacion-social" class="course-card">
+        <div class="course-header">
+          <div class="course-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/>
+            </svg>
+          </div>
+          <span class="course-badge course-badge-active">Cursando</span>
+        </div>
+        <h3 class="course-title">Comunicación Social</h3>
+        <p class="course-teacher">Dr. Andrés Ruiz</p>
+        <div class="course-progress">
+          <div class="progress-info">
+            <span class="progress-label">Progreso</span>
+            <span class="progress-value">40%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 40%;"></div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="upcoming-section">
+    <div class="section-header">
+      <h2 class="section-title">
+        Próximos Exámenes
+        <span class="course-count warning">2</span>
+      </h2>
+      <a href="/calendario" class="see-all-link">Ver calendario</a>
+    </div>
+
+    <div class="exams-list">
+      <article class="exam-card">
+        <div class="exam-date">
+          <span class="exam-day">12</span>
+          <span class="exam-month">Abr</span>
+        </div>
+        <div class="exam-info">
+          <h3 class="exam-title">Parcial: Programación Multimedial II</h3>
+          <p class="exam-details">Aula 402 - Edificio Principal</p>
+        </div>
+        <div class="exam-status exam-status-soon">4 días</div>
+      </article>
+
+      <article class="exam-card">
+        <div class="exam-date">
+          <span class="exam-day">18</span>
+          <span class="exam-month">Abr</span>
+        </div>
+        <div class="exam-info">
+          <h3 class="exam-title">Parcial: Producción Audiovisual</h3>
+          <p class="exam-details">Lab. de Video - Piso 3</p>
+        </div>
+        <div class="exam-status exam-status-warning">10 días</div>
+      </article>
+    </div>
+  </section>
+
+  <section class="pending-section">
+    <div class="section-header">
+      <h2 class="section-title">Pendientes</h2>
+    </div>
+
+    <div class="pending-list">
+      <article class="pending-card">
+        <div class="pending-icon pending-icon-urgent">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <div class="pending-content">
+          <h3 class="pending-title">TP Final: Arte Digital I</h3>
+          <p class="pending-meta">Vence en 2 días</p>
+        </div>
+        <a href="/materias/arte-digital-i" class="btn btn-sm btn-primary">Entregar</a>
+      </article>
+
+      <article class="pending-card">
+        <div class="pending-icon pending-icon-warning">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+          </svg>
+        </div>
+        <div class="pending-content">
+          <h3 class="pending-title">Cuestionario: Diseño Aplicado</h3>
+          <p class="pending-meta">Vence en 5 días</p>
+        </div>
+        <a href="/materias/diseno-aplicado" class="btn btn-sm btn-secondary">Resolver</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="announcements-section">
+    <div class="section-header">
+      <h2 class="section-title">Anuncios</h2>
+    </div>
+
+    <div class="announcements-list">
+      <article class="announcement-card announcement-urgent">
+        <div class="announcement-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </div>
+        <div class="announcement-content">
+          <h3 class="announcement-title">Aula invertida: Prog. Multimedial II</h3>
+          <p class="announcement-text">Revisá el video sobre React Native antes del parcial del viernes.</p>
+          <time class="announcement-time">Hoy, 09:30</time>
+        </div>
+      </article>
+
+      <article class="announcement-card">
+        <div class="announcement-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
+        <div class="announcement-content">
+          <h3 class="announcement-title">Nuevo material: Arte Digital I</h3>
+          <p class="announcement-text">Subí el taller de Illustrator para el TP final.</p>
+          <time class="announcement-time">Ayer</time>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="studyplan-section">
+    <div class="section-header">
+      <h2 class="section-title">Plan de Estudios</h2>
+      <a href="/situacion" class="see-all-link">Ver avance</a>
+    </div>
+
+    <div class="studyplan-container">
+      <div class="studyplan-year">
+        <div class="studyplan-year-header studyplan-completed">
+          <span class="studyplan-year-number">1er Año</span>
+          <span class="studyplan-year-status">Completado</span>
+        </div>
+        <div class="studyplan-materias">
+          <span class="studyplan-materia approved">Fundamentos de Diseño</span>
+          <span class="studyplan-materia approved">Imagen Digital</span>
+          <span class="studyplan-materia approved">Producción Digital I</span>
+          <span class="studyplan-materia approved">Programación MM I</span>
+          <span class="studyplan-materia approved">Redes y Tecnologías</span>
+        </div>
+      </div>
+
+      <div class="studyplan-year">
+        <div class="studyplan-year-header studyplan-completed">
+          <span class="studyplan-year-number">2do Año</span>
+          <span class="studyplan-year-status">Completado</span>
+        </div>
+        <div class="studyplan-materias">
+          <span class="studyplan-materia approved">Diseño de Interfaces</span>
+          <span class="studyplan-materia approved">Producción Digital II</span>
+          <span class="studyplan-materia approved">Técnicas de Animación</span>
+          <span class="studyplan-materia approved">Programación MM II</span>
+          <span class="studyplan-materia approved">Historia del Arte</span>
+        </div>
+      </div>
+
+      <div class="studyplan-year">
+        <div class="studyplan-year-header studyplan-current">
+          <span class="studyplan-year-number">3er Año</span>
+          <span class="studyplan-year-status">En Curso</span>
+        </div>
+        <div class="studyplan-materias">
+          <span class="studyplan-materia current">Prog. Multimedial II</span>
+          <span class="studyplan-materia current">Diseño Aplicado</span>
+          <span class="studyplan-materia current">Producción Audiovisual</span>
+          <span class="studyplan-materia current">Arte Digital I</span>
+          <span class="studyplan-materia current">Comunicación Social</span>
+          <span class="studyplan-materia">Investigación de Mercado</span>
+          <span class="studyplan-materia">Marketing Aplicado</span>
+        </div>
+      </div>
+
+      <div class="studyplan-year">
+        <div class="studyplan-year-header studyplan-pending">
+          <span class="studyplan-year-number">4to Año</span>
+          <span class="studyplan-year-status">Pendiente</span>
+        </div>
+        <div class="studyplan-materias">
+          <span class="studyplan-materia">Prog. Multimedial III</span>
+          <span class="studyplan-materia">Diseño Estratégico</span>
+          <span class="studyplan-materia">Sistemas Gamificados</span>
+          <span class="studyplan-materia">Proyecto Senior II</span>
+          <span class="studyplan-materia">Trabajo Final</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

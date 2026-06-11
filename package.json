@@ -1,0 +1,17 @@
+{
+  "name": "campus-virtual-umai",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Campus Virtual UMAI - Rediseño con Astro",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "node server.js",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.0.0",
+    "express": "^5.2.1",
+    "mongoose": "^9.7.0"
+  }
+}

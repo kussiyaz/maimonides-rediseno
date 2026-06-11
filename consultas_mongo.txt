@@ -1,0 +1,124 @@
+==============================================
+  CONSULTAS MongoDB — Campus Virtual UMA
+  Colección: alumnos
+==============================================
+
+------------------------------------------------------------------
+  1. Buscar un alumno por su ID y traer su lista de materias
+------------------------------------------------------------------
+
+db.alumnos.find(
+  { "_id": ObjectId("660a1b2c3d4e5f6a7b8c9d01") },
+  { "nombre": 1, "apellido": 1, "legajo": 1, "materias": 1, "_id": 0 }
+)
+
+// Con agregación (solo las materias, sin datos personales)
+db.alumnos.aggregate([
+  { $match: { "_id": ObjectId("660a1b2c3d4e5f6a7b8c9d01") } },
+  { $project: { "materias": 1, "_id": 0 } },
+  { $unwind: "$materias" },
+  { $replaceRoot: { newRoot: "$materias" } }
+])
+
+
+------------------------------------------------------------------
+  2. Alumnos cursando "Bases de Datos I" (ejemplo genérico)
+------------------------------------------------------------------
+
+db.alumnos.find(
+  {
+    "materias": {
+      $elemMatch: {
+        "nombre": "Bases de Datos I",
+        "estado": "cursando"
+      }
+    }
+  },
+  { "nombre": 1, "apellido": 1, "legajo": 1, "materias.$": 1, "_id": 0 }
+)
+
+// Versión con Projection — solo devuelve la materia que matchea
+db.alumnos.find(
+  { "materias.nombre": "Bases de Datos I", "materias.estado": "cursando" },
+  { "nombre": 1, "apellido": 1, "legajo": 1, "materias.$": 1, "_id": 0 }
+)
+
+// Con agregación
+db.alumnos.aggregate([
+  { $unwind: "$materias" },
+  { $match: { "materias.nombre": "Bases de Datos I", "materias.estado": "cursando" } },
+  {
+    $group: {
+      _id: "$_id",
+      nombre: { $first: "$nombre" },
+      apellido: { $first: "$apellido" },
+      legajo: { $first: "$legajo" },
+      materia: { $push: "$materias" }
+    }
+  },
+  { $project: { "nombre": 1, "apellido": 1, "legajo": 1, "materia": 1, "_id": 0 } }
+])
+
+
+------------------------------------------------------------------
+  3. Alumnos con "Programación I" en estado "Aprobada"
+------------------------------------------------------------------
+
+db.alumnos.find(
+  {
+    "materias": {
+      $elemMatch: {
+        "nombre": "Programación I",
+        "estado": "Aprobada"
+      }
+    }
+  },
+  { "nombre": 1, "apellido": 1, "legajo": 1, "materias.$": 1, "_id": 0 }
+)
+
+// Con filtro insensible a mayúsculas / regex
+db.alumnos.find(
+  {
+    "materias": {
+      $elemMatch: {
+        "nombre": { $regex: /^Programación I$/i },
+        "estado": { $regex: /^aprobada$/i }
+      }
+    }
+  },
+  { "nombre": 1, "apellido": 1, "legajo": 1, "materias.$": 1, "_id": 0 }
+)
+
+// Con agregación — obtener todas las materias aprobadas, no solo la que matchea
+db.alumnos.aggregate([
+  {
+    $match: {
+      "materias": {
+        $elemMatch: {
+          "nombre": { $regex: /^Programación I$/i },
+          "estado": { $regex: /^aprobada$/i }
+        }
+      }
+    }
+  },
+  {
+    $project: {
+      nombre: 1,
+      apellido: 1,
+      legajo: 1,
+      materias: {
+        $filter: {
+          input: "$materias",
+          as: "m",
+          cond: {
+            $and: [
+              { $regexMatch: { input: "$$m.nombre", regex: /^Programación I$/i } },
+              { $regexMatch: { input: "$$m.estado", regex: /^aprobada$/i } }
+            ]
+          }
+        }
+      },
+      _id: 0
+    }
+  }
+])

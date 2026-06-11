@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Situación Académica" pageTitle="Situación Académica" activeNav="materias" sidebarActive="situacion">
+  <section class="academic-summary">
+    <div class="summary-card">
+      <div class="summary-stat">
+        <span class="summary-value">26</span>
+        <span class="summary-label">Materias Aprobadas</span>
+      </div>
+      <div class="summary-stat">
+        <span class="summary-value">5</span>
+        <span class="summary-label">Cursando</span>
+      </div>
+      <div class="summary-stat">
+        <span class="summary-value">72%</span>
+        <span class="summary-label">Avance</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="academic-progress">
+    <h3 class="section-subtitle">Historial Académico</h3>
+    <div class="history-list">
+      <div class="history-item">
+        <div class="history-icon history-approved">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="history-content">
+          <span class="history-materia">Diseño de Interfaces</span>
+          <span class="history-detail">Aprobada · 8/10 · 1er Cuat 2024</span>
+        </div>
+      </div>
+      <div class="history-item">
+        <div class="history-icon history-approved">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="history-content">
+          <span class="history-materia">Producción Digital II</span>
+          <span class="history-detail">Aprobada · 7/10 · 1er Cuat 2024</span>
+        </div>
+      </div>
+      <div class="history-item">
+        <div class="history-icon history-approved">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="history-content">
+          <span class="history-materia">Técnicas de Animación</span>
+          <span class="history-detail">Aprobada · 9/10 · 1er Cuat 2024</span>
+        </div>
+      </div>
+      <div class="history-item">
+        <div class="history-icon history-approved">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="history-content">
+          <span class="history-materia">Programación Multimedial I</span>
+          <span class="history-detail">Aprobada · 8/10 · 2do Cuat 2023</span>
+        </div>
+      </div>
+      <div class="history-item">
+        <div class="history-icon history-approved">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="history-content">
+          <span class="history-materia">Redes y Tecnologías</span>
+          <span class="history-detail">Aprobada · 7/10 · 2do Cuat 2023</span>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-secondary btn-block">Ver historial completo</button>
+  </section>
+
+  <section class="academic-plan">
+    <h3 class="section-subtitle">Plan de Estudios</h3>
+    <div class="year-section">
+      <h4 class="year-title">1er Año <span class="year-status year-status-complete">Completado</span></h4>
+      <div class="year-materias">
+        <span class="materia-tag materia-approved">Fundamentos de Diseño</span>
+        <span class="materia-tag materia-approved">Imagen Digital</span>
+        <span class="materia-tag materia-approved">Producción Digital I</span>
+        <span class="materia-tag materia-approved">Programación MM I</span>
+        <span class="materia-tag materia-approved">Redes y Tecnologías</span>
+      </div>
+    </div>
+    <div class="year-section">
+      <h4 class="year-title">2do Año <span class="year-status year-status-complete">Completado</span></h4>
+      <div class="year-materias">
+        <span class="materia-tag materia-approved">Diseño de Interfaces</span>
+        <span class="materia-tag materia-approved">Producción Digital II</span>
+        <span class="materia-tag materia-approved">Técnicas de Animación</span>
+        <span class="materia-tag materia-approved">Programación MM II</span>
+        <span class="materia-tag materia-approved">Historia del Arte</span>
+      </div>
+    </div>
+    <div class="year-section">
+      <h4 class="year-title">3er Año <span class="year-status year-status-current">En Curso</span></h4>
+      <div class="year-materias">
+        <span class="materia-tag materia-current">Prog. Multimedial II</span>
+        <span class="materia-tag materia-current">Diseño Aplicado</span>
+        <span class="materia-tag materia-current">Producción Audiovisual</span>
+        <span class="materia-tag materia-current">Arte Digital I</span>
+        <span class="materia-tag materia-current">Comunicación Social</span>
+        <span class="materia-tag">Investigación de Mercado</span>
+        <span class="materia-tag">Marketing Aplicado</span>
+      </div>
+    </div>
+    <div class="year-section">
+      <h4 class="year-title">4to Año <span class="year-status year-status-pending">Pendiente</span></h4>
+      <div class="year-materias">
+        <span class="materia-tag">Prog. Multimedial III</span>
+        <span class="materia-tag">Diseño Estratégico</span>
+        <span class="materia-tag">Sistemas Gamificados</span>
+        <span class="materia-tag">Proyecto Senior II</span>
+        <span class="materia-tag">Trabajo Final</span>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAlumnoById } from '../../utils/db';
+import alumnos from '../../../alumnos_mock.json' assert { type: 'json' };
+
+export async function getStaticPaths() {
+  return alumnos.map((a, i) => ({
+    params: { id: String(i + 1) },
+  }));
+}
+
+const index = parseInt(Astro.params.id) - 1;
+const alumno = getAlumnoById(alumnos[index]._id.$oid);
+const nombreCompleto = `${alumno.nombre} ${alumno.apellido}`;
+const fechaFormateada = alumno.fechaNacimiento.split('-').reverse().join('/');
+const horario = alumno.materias.find(m => m.estado === 'cursando')?.horario || '—';
+const dir = alumno.direccion;
+---
+
+<BaseLayout title={nombreCompleto} pageTitle="Mi Perfil" activeNav="perfil" sidebarActive="perfil" studentName={nombreCompleto} studentAvatar={`https://i.pravatar.cc/200?u=${alumno._id.$oid}`} studentCareer={alumno.carrera} studentId={String(index + 1)}>
+  <section class="profile-header-section">
+    <div class="profile-card">
+      <div class="profile-avatar">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face" alt={nombreCompleto}>
+      </div>
+      <input type="file" id="photoInput" accept="image/*" style="display: none;">
+      <button class="btn btn-sm btn-secondary" onclick="document.getElementById('photoInput').click()">Cambiar foto</button>
+      <div class="profile-info">
+        <h2 class="profile-name">{nombreCompleto}</h2>
+        <p class="profile-email">{alumno.email}</p>
+        <span class="profile-badge">Estudiante Activo</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="profile-data-section">
+    <h3 class="section-subtitle">Datos Personales</h3>
+    <div class="data-list">
+      <div class="data-item">
+        <span class="data-label">Documento</span>
+        <span class="data-value">DNI {alumno.dni}</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Fecha de Nacimiento</span>
+        <span class="data-value">{fechaFormateada}</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Teléfono</span>
+        <span class="data-value">{alumno.telefono}</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Dirección</span>
+        <span class="data-value">{dir.ciudad}, {dir.provincia}</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="profile-data-section">
+    <h3 class="section-subtitle">Datos Académicos</h3>
+    <div class="data-list">
+      <div class="data-item">
+        <span class="data-label">Legajo</span>
+        <span class="data-value">{alumno.legajo}</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Carrera</span>
+        <span class="data-value">{alumno.carrera}</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Año de Cursada</span>
+        <span class="data-value">{alumno.anioCursada}° Año</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Modalidad</span>
+        <span class="data-value">{alumno.modalidad}</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Horario</span>
+        <span class="data-value">{horario}</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Estado</span>
+        <span class="data-value data-value-success">{alumno.estado}</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="profile-actions-section">
+    <a href="/configuracion" class="action-card">
+      <div class="action-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+      </div>
+      <div class="action-content">
+        <span class="action-title">Configuración de Cuenta</span>
+        <span class="action-desc">Cambiar contraseña, idioma, notificaciones</span>
+      </div>
+      <svg class="action-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </a>
+  </section>
+
+  <script>
+    const photoInput = document.getElementById('photoInput');
+    if (photoInput) {
+      photoInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            const img = document.querySelector('.profile-avatar img');
+            if (img) {
+              img.src = event.target.result;
+            }
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+  </script>
+</BaseLayout>

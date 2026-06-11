@@ -1,0 +1,154 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Exámenes Finales" pageTitle="Exámenes" activeNav="materias" sidebarActive="examenes">
+  <section class="finals-info">
+    <div class="info-card">
+      <div class="info-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      </div>
+      <div class="info-content">
+        <h4>Período de Finales - Abril/Mayo 2026</h4>
+        <p>Inscripción: Hasta el 20 de abril</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pending-finals-section">
+    <h3 class="section-subtitle">Finales Disponibles para Inscribirse</h3>
+    <div class="finals-list">
+      <div class="final-card">
+        <div class="final-main">
+          <h4 class="final-materia">Redes y Tecnologías</h4>
+          <p class="final-teacher">Ing. Martín López</p>
+        </div>
+        <div class="final-details">
+          <div class="final-date">
+            <span class="final-label">1er Llamado</span>
+            <span class="final-value">28 Abr 2026</span>
+          </div>
+          <div class="final-date">
+            <span class="final-label">2do Llamado</span>
+            <span class="final-value">15 May 2026</span>
+          </div>
+        </div>
+        <div class="final-status final-status-available">Disponible</div>
+        <button class="btn btn-sm btn-primary" onclick="openMaterial('Inscribirse a Redes y Tecnologías', 'Entrega')">Inscribirme</button>
+      </div>
+
+      <div class="final-card">
+        <div class="final-main">
+          <h4 class="final-materia">Taller de Integración II</h4>
+          <p class="final-teacher">Mg. Paula García</p>
+        </div>
+        <div class="final-details">
+          <div class="final-date">
+            <span class="final-label">1er Llamado</span>
+            <span class="final-value">02 May 2026</span>
+          </div>
+          <div class="final-date">
+            <span class="final-label">2do Llamado</span>
+            <span class="final-value">18 May 2026</span>
+          </div>
+        </div>
+        <div class="final-status final-status-available">Disponible</div>
+        <button class="btn btn-sm btn-primary" onclick="openMaterial('Inscribirse a Taller de Integración II', 'Entrega')">Inscribirme</button>
+      </div>
+
+      <div class="final-card">
+        <div class="final-main">
+          <h4 class="final-materia">Estructuras Narrativas</h4>
+          <p class="final-teacher">Lic. Roberto Díaz</p>
+        </div>
+        <div class="final-details">
+          <div class="final-date">
+            <span class="final-label">1er Llamado</span>
+            <span class="final-value">05 May 2026</span>
+          </div>
+          <div class="final-date">
+            <span class="final-label">2do Llamado</span>
+            <span class="final-value">20 May 2026</span>
+          </div>
+        </div>
+        <div class="final-status final-status-available">Disponible</div>
+        <button class="btn btn-sm btn-primary" onclick="openMaterial('Inscribirse a Estructuras Narrativas', 'Entrega')">Inscribirme</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="inscribed-section">
+    <h3 class="section-subtitle">Finales Inscritos</h3>
+    <div class="inscribed-list">
+      <div class="inscribed-card">
+        <div class="inscribed-main">
+          <h4 class="inscribed-materia">Redes y Tecnologías</h4>
+          <p class="inscribed-date">28 Abr 2026 · 10:00 · Aula 205</p>
+        </div>
+        <div class="inscribed-status inscribed-confirmed">Confirmado</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="history-finals-section">
+    <h3 class="section-subtitle">Historial de Finales</h3>
+    <div class="history-list">
+      <div class="history-item">
+        <div class="history-icon history-approved">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="history-content">
+          <span class="history-materia">Programación Multimedial I</span>
+          <span class="history-detail">Aprobado · 8/10 · 15 Dic 2023</span>
+        </div>
+      </div>
+      <div class="history-item">
+        <div class="history-icon history-approved">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="history-content">
+          <span class="history-materia">Producción Digital I</span>
+          <span class="history-detail">Aprobado · 9/10 · 10 Dic 2023</span>
+        </div>
+      </div>
+      <div class="history-item">
+        <div class="history-icon history-failed">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </div>
+        <div class="history-content">
+          <span class="history-materia">Historia y Apreciación del Arte</span>
+          <span class="history-detail">Desaprobado · 4/10 · 20 Feb 2024</span>
+        </div>
+      </div>
+      <div class="history-item">
+        <div class="history-icon history-approved">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="history-content">
+          <span class="history-materia">Historia y Apreciación del Arte</span>
+          <span class="history-detail">Aprobado · 7/10 · 15 Jul 2024</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="material-modal-overlay" id="materialModal">
+    <div class="material-modal">
+      <div class="material-modal-header">
+        <h3 class="material-modal-title" id="modalTitle">Material</h3>
+        <button class="material-modal-close" onclick="closeMaterialModal()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="material-modal-body">
+        <div class="material-modal-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <p class="material-modal-text" id="modalText">Abriendo contenido...</p>
+      </div>
+      <div class="material-modal-footer">
+        <button class="btn btn-primary" onclick="closeMaterialModal()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

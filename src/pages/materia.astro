@@ -1,0 +1,163 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Programación Multimedial II" pageTitle="Prog. MM II" activeNav="materias" sidebarActive="materias">
+  <section class="subject-header">
+    <div class="subject-card">
+      <div class="subject-icon" style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+          <polyline points="16 18 22 12 16 6"/>
+          <polyline points="8 6 2 12 8 18"/>
+        </svg>
+      </div>
+      <div class="subject-info">
+        <h2 class="subject-title">Programación Multimedial II</h2>
+        <p class="subject-teacher">Mg. Damián Pereyra</p>
+        <span class="subject-badge">Cursando</span>
+      </div>
+    </div>
+    <div class="subject-progress">
+      <div class="progress-info">
+        <span>Unidad 7 de 9</span>
+        <span class="progress-value">78%</span>
+      </div>
+      <div class="progress-bar progress-bar-lg">
+        <div class="progress-fill" style="width: 78%;"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="units-section">
+    <h3 class="section-subtitle">Unidades</h3>
+    <div class="units-list">
+      <div class="unit-item unit-completed">
+        <div class="unit-indicator"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="unit-content">
+          <h4 class="unit-title">Unidad 1-5: Fundamentos de React</h4>
+          <p class="unit-status">Completado</p>
+        </div>
+      </div>
+      <div class="unit-item unit-completed">
+        <div class="unit-indicator"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="unit-content">
+          <h4 class="unit-title">Unidad 6: React Native Intro</h4>
+          <p class="unit-status">Completado</p>
+        </div>
+      </div>
+      <div class="unit-item unit-active">
+        <div class="unit-indicator"><span class="unit-current">7</span></div>
+        <div class="unit-content">
+          <h4 class="unit-title">Unidad 7: Componentes y Props</h4>
+          <p class="unit-status unit-status-current">En curso</p>
+        </div>
+      </div>
+      <div class="unit-item unit-locked">
+        <div class="unit-indicator"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="unit-content">
+          <h4 class="unit-title">Unidad 8: Hooks Básicos</h4>
+          <p class="unit-status">Bloqueado</p>
+        </div>
+      </div>
+      <div class="unit-item unit-locked">
+        <div class="unit-indicator"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="unit-content">
+          <h4 class="unit-title">Unidad 9: Integración Final</h4>
+          <p class="unit-status">Bloqueado</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="materials-section">
+    <h3 class="section-subtitle">Material de la Unidad 7</h3>
+    <div class="materials-list">
+      <div class="material-card">
+        <div class="material-icon material-icon-pdf">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div class="material-content">
+          <h4 class="material-title">Guía: Componentes y Props</h4>
+          <p class="material-detail">PDF · 2.4 MB</p>
+        </div>
+        <button class="btn btn-sm btn-secondary" onclick="openMaterial('Guía: Componentes y Props', 'PDF')">Ver</button>
+      </div>
+      <div class="material-card">
+        <div class="material-icon material-icon-video">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <div class="material-content">
+          <h4 class="material-title">Video: useState y useEffect</h4>
+          <p class="material-detail">15:32 min</p>
+        </div>
+        <button class="btn btn-sm btn-secondary" onclick="openMaterial('Video: useState y useEffect', 'Video')">Ver</button>
+      </div>
+      <div class="material-card">
+        <div class="material-icon material-icon-code">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <div class="material-content">
+          <h4 class="material-title">Práctica: Components Lab</h4>
+          <p class="material-detail">Ejercicios interactivos</p>
+        </div>
+        <button class="btn btn-sm btn-primary" onclick="openMaterial('Práctica: Components Lab', 'Práctica')">Abrir</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="assignments-section">
+    <h3 class="section-subtitle">Entregas Pendientes</h3>
+    <div class="assignments-list">
+      <div class="assignment-card assignment-urgent">
+        <div class="assignment-content">
+          <h4 class="assignment-title">TP Final: App de Notas</h4>
+          <p class="assignment-detail">Entrega: 14 Abr · 23:59</p>
+        </div>
+        <div class="assignment-status">
+          <span class="assignment-countdown">2 días</span>
+          <button class="btn btn-sm btn-primary" onclick="openMaterial('TP Final: App de Notas', 'Entrega')">Entregar</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="forum-section">
+    <h3 class="section-subtitle">Foro de la Materia</h3>
+    <div class="forum-topics">
+      <div class="forum-topic" onclick="openMaterial('Dudas sobre el TP Final', 'Foro')">
+        <div class="forum-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="forum-content">
+          <h4 class="forum-title">Dudas sobre el TP Final</h4>
+          <p class="forum-meta">12 mensajes · Último: Hace 2h</p>
+        </div>
+      </div>
+      <div class="forum-topic" onclick="openMaterial('Errores comunes en useEffect', 'Foro')">
+        <div class="forum-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="forum-content">
+          <h4 class="forum-title">Errores comunes en useEffect</h4>
+          <p class="forum-meta">8 mensajes · Último: Ayer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="material-modal-overlay" id="materialModal">
+    <div class="material-modal">
+      <div class="material-modal-header">
+        <h3 class="material-modal-title" id="modalTitle">Material</h3>
+        <button class="material-modal-close" onclick="closeMaterialModal()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="material-modal-body">
+        <div class="material-modal-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <p class="material-modal-text" id="modalText">Abriendo contenido...</p>
+      </div>
+      <div class="material-modal-footer">
+        <button class="btn btn-primary" onclick="closeMaterialModal()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Mensajes" pageTitle="Mensajes" activeNav="mensajes" sidebarActive="mensajes">
+  <div class="messages-layout">
+    <div class="messages-list">
+      <div class="search-container">
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="search" class="search-input" placeholder="Buscar conversación...">
+      </div>
+
+      <div class="conversation-item conversation-unread" onclick="openChat('Damián Pereyra', 'Programación Multimedial II', 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face')">
+        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face" alt="Mg. Damián Pereyra" class="conversation-avatar">
+        <div class="conversation-content">
+          <div class="conversation-header">
+            <span class="conversation-name">Mg. Damián Pereyra</span>
+            <span class="conversation-time">10:30</span>
+          </div>
+          <p class="conversation-preview">Yazmin, recordá que el parcial del viernes...</p>
+        </div>
+        <span class="unread-badge">2</span>
+      </div>
+
+      <div class="conversation-item conversation-unread" onclick="openChat('Carolina Sánchez', 'Diseño Aplicado', 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face')">
+        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face" alt="Lic. Carolina Sánchez" class="conversation-avatar">
+        <div class="conversation-content">
+          <div class="conversation-header">
+            <span class="conversation-name">Lic. Carolina Sánchez</span>
+            <span class="conversation-time">Ayer</span>
+          </div>
+          <p class="conversation-preview">Buenas! Te informo que el TP de Diseño...</p>
+        </div>
+        <span class="unread-badge">1</span>
+      </div>
+
+      <div class="conversation-item" onclick="openChat('Andrés Ruiz', 'Comunicación Social', 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face')">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face" alt="Dr. Andrés Ruiz" class="conversation-avatar">
+        <div class="conversation-content">
+          <div class="conversation-header">
+            <span class="conversation-name">Dr. Andrés Ruiz</span>
+            <span class="conversation-time">Lun</span>
+          </div>
+          <p class="conversation-preview">El material de la próxima clase ya está...</p>
+        </div>
+      </div>
+
+      <div class="conversation-item" onclick="openChat('Lucía Fernández', 'Arte Digital I', 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face')">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face" alt="Prof. Lucía Fernández" class="conversation-avatar">
+        <div class="conversation-content">
+          <div class="conversation-header">
+            <span class="conversation-name">Prof. Lucía Fernández</span>
+            <span class="conversation-time">Sáb</span>
+          </div>
+          <p class="conversation-preview">Recibí tu entrega del TP Final. Muy buen...</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-view" id="chatView">
+      <div class="chat-header" id="chatHeader">
+        <button class="back-to-list" id="backToList" onclick="closeChat()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <img src="" alt="" class="chat-avatar" id="chatAvatar">
+        <div class="chat-info">
+          <span class="chat-name" id="chatName">Mg. Damián Pereyra</span>
+          <span class="chat-status" id="chatStatus">Programación Multimedial II</span>
+        </div>
+        <button class="icon-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+      </div>
+
+      <div class="chat-messages" id="chatMessages">
+        <div class="message message-other">
+          <p>Buenas tardes Yazmin!</p>
+          <span class="message-time">10:15</span>
+        </div>
+        <div class="message message-other">
+          <p>Te escribo para recordarte que el parcial de Prog. Multimedial II es este viernes 12 de abril.</p>
+          <span class="message-time">10:15</span>
+        </div>
+        <div class="message message-other">
+          <p>El examen será sobre React Native y los hooks básicos (useState, useEffect). Les recomiendo revisar los videos de las unidades 6 y 7.</p>
+          <span class="message-time">10:16</span>
+        </div>
+        <div class="message message-me">
+          <p>Buenas tardes profesor! Ya estuve repasando los videos. ¿Podemos usar apuntes durante el parcial?</p>
+          <span class="message-time">10:25 ✓✓</span>
+        </div>
+        <div class="message message-other">
+          <p>Sí, pueden usar sus apuntes y ejercicios prácticos. Pero no está permitido el celular ni notebooks.</p>
+          <span class="message-time">10:28</span>
+        </div>
+        <div class="message message-other">
+          <p>Cualquier duda me escriben por aquí. Éxitos!</p>
+          <span class="message-time">10:30</span>
+        </div>
+      </div>
+
+      <div class="chat-input">
+        <button class="icon-btn" aria-label="Adjuntar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></button>
+        <input type="text" placeholder="Escribí un mensaje..." class="chat-message-input">
+        <button class="icon-btn btn-send" aria-label="Enviar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

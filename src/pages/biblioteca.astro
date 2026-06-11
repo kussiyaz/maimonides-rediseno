@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Biblioteca" pageTitle="Biblioteca" activeNav="materias" sidebarActive="biblioteca">
+  <section class="search-section">
+    <div class="search-container">
+      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="search" class="search-input" placeholder="Buscar libros, artículos, revistas...">
+    </div>
+  </section>
+
+  <section class="my-loans-section">
+    <h3 class="section-subtitle">Mis Préstamos Activos</h3>
+    <div class="loans-list">
+      <div class="loan-card" onclick="openMaterial('Diseño de Interfaces Modernas', 'PDF')">
+        <div class="loan-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <div class="loan-content">
+          <h4 class="loan-title">Diseño de Interfaces Modernas</h4>
+          <p class="loan-detail">Devolución: 15 Abr 2026</p>
+          <span class="loan-status loan-status-ok">En tiempo</span>
+        </div>
+      </div>
+      <div class="loan-card" onclick="openMaterial('Introducción a React Native', 'PDF')">
+        <div class="loan-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <div class="loan-content">
+          <h4 class="loan-title">Introducción a React Native</h4>
+          <p class="loan-detail">Devolución: 18 Abr 2026</p>
+          <span class="loan-status loan-status-warning">Próximo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="resources-section">
+    <h3 class="section-subtitle">Recursos por Materia</h3>
+    <div class="resources-tabs">
+      <button class="resource-tab active">Todos</button>
+      <button class="resource-tab">Prog. MM II</button>
+      <button class="resource-tab">Diseño</button>
+      <button class="resource-tab">Audiovisual</button>
+    </div>
+    <div class="resources-grid">
+      <div class="resource-card">
+        <div class="resource-type">PDF</div>
+        <h4 class="resource-title">Guía de Componentes React</h4>
+        <p class="resource-author">Mg. Damián Pereyra</p>
+        <button class="btn btn-sm btn-secondary" onclick="openMaterial('Guía de Componentes React', 'PDF')">Descargar</button>
+      </div>
+      <div class="resource-card">
+        <div class="resource-type">PDF</div>
+        <h4 class="resource-title">Patrones de Diseño UI/UX</h4>
+        <p class="resource-author">Lic. Carolina Sánchez</p>
+        <button class="btn btn-sm btn-secondary" onclick="openMaterial('Patrones de Diseño UI/UX', 'PDF')">Descargar</button>
+      </div>
+      <div class="resource-card">
+        <div class="resource-type">Video</div>
+        <h4 class="resource-title">Tutorial: After Effects</h4>
+        <p class="resource-author">Lic. Marcos Torres</p>
+        <button class="btn btn-sm btn-secondary" onclick="openMaterial('Tutorial: After Effects', 'Video')">Ver</button>
+      </div>
+      <div class="resource-card">
+        <div class="resource-type">PDF</div>
+        <h4 class="resource-title">Teoría del Color Digital</h4>
+        <p class="resource-author">Prof. Lucía Fernández</p>
+        <button class="btn btn-sm btn-secondary" onclick="openMaterial('Teoría del Color Digital', 'PDF')">Descargar</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="databases-section">
+    <h3 class="section-subtitle">Bases de Datos</h3>
+    <div class="databases-list">
+      <a href="#" class="database-card">
+        <span class="database-name">E-libro</span>
+        <span class="database-desc">Biblioteca digital</span>
+      </a>
+      <a href="#" class="database-card">
+        <span class="database-name">EBSCOhost</span>
+        <span class="database-desc">Artículos académicos</span>
+      </a>
+      <a href="#" class="database-card">
+        <span class="database-name">ProQuest</span>
+        <span class="database-desc">Tesis y papers</span>
+      </a>
+      <a href="#" class="database-card">
+        <span class="database-name">SciELO</span>
+        <span class="database-desc">Acceso abierto</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="material-modal-overlay" id="materialModal">
+    <div class="material-modal">
+      <div class="material-modal-header">
+        <h3 class="material-modal-title" id="modalTitle">Material</h3>
+        <button class="material-modal-close" onclick="closeMaterialModal()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="material-modal-body">
+        <div class="material-modal-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <p class="material-modal-text" id="modalText">Abriendo contenido...</p>
+      </div>
+      <div class="material-modal-footer">
+        <button class="btn btn-primary" onclick="closeMaterialModal()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

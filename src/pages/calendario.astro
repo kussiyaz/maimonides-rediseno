@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Calendario Académico" pageTitle="Calendario" activeNav="calendario" sidebarActive="calendario">
+  <section class="calendar-actions">
+    <button class="btn btn-primary" id="syncGoogleCalendar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+        <polyline points="15 3 21 3 21 9"/>
+        <line x1="10" y1="14" x2="21" y2="3"/>
+      </svg>
+      Sincronizar con Google Calendar
+    </button>
+    <button class="btn btn-secondary" id="addPersonalEvent">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="12" y1="5" x2="12" y2="19"/>
+        <line x1="5" y1="12" x2="19" y2="12"/>
+      </svg>
+      Agregar Evento
+    </button>
+  </section>
+
+  <section class="calendar-month">
+    <div class="month-header">
+      <button class="month-nav" id="prevMonth"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <h2 class="month-title" id="currentMonth">Abril 2026</h2>
+      <button class="month-nav" id="nextMonth"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+    </div>
+    <div class="calendar-grid" id="calendarGrid">
+      <div class="calendar-day-header">Lun</div>
+      <div class="calendar-day-header">Mar</div>
+      <div class="calendar-day-header">Mié</div>
+      <div class="calendar-day-header">Jue</div>
+      <div class="calendar-day-header">Vie</div>
+      <div class="calendar-day-header">Sáb</div>
+      <div class="calendar-day-header">Dom</div>
+      
+      <div class="calendar-day empty"></div>
+      <div class="calendar-day empty"></div>
+      <div class="calendar-day past" data-day="1" data-events='[]'>1</div>
+      <div class="calendar-day past" data-day="2" data-events='[]'>2</div>
+      <div class="calendar-day past" data-day="3" data-events='[]'>3</div>
+      <div class="calendar-day past" data-day="4" data-events='[]'>4</div>
+      <div class="calendar-day past" data-day="5" data-events='[]'>5</div>
+      <div class="calendar-day past" data-day="6" data-events='[]'>6</div>
+      <div class="calendar-day past" data-day="7" data-events='[]'>7</div>
+      <div class="calendar-day today" data-day="8" data-events='[]'>8</div>
+      <div class="calendar-day" data-day="9" data-events='[]'>9</div>
+      <div class="calendar-day event exam" data-day="10" data-events='[{"type":"exam","title":"Parcial","materia":"Diseño Aplicado","detail":"Aula 301 · 18:30 hs"}]'>10</div>
+      <div class="calendar-day event class" data-day="11" data-events='[{"type":"class","title":"Clase","materia":"Arte Digital I","detail":"Aula 301 · 18:30 hs"}]'>11</div>
+      <div class="calendar-day event exam" data-day="12" data-events='[{"type":"exam","title":"Parcial","materia":"Programación Multimedial II","detail":"Aula 402 · 10:00 hs"}]'>12</div>
+      <div class="calendar-day" data-day="13" data-events='[]'>13</div>
+      <div class="calendar-day" data-day="14" data-events='[]'>14</div>
+      <div class="calendar-day event class" data-day="15" data-events='[{"type":"class","title":"Clase","materia":"Arte Digital I","detail":"Aula 301 · 18:30 hs"}]'>15</div>
+      <div class="calendar-day" data-day="16" data-events='[]'>16</div>
+      <div class="calendar-day" data-day="17" data-events='[]'>17</div>
+      <div class="calendar-day event exam" data-day="18" data-events='[{"type":"exam","title":"Parcial","materia":"Producción Audiovisual","detail":"Lab. de Video · 18:30 hs"}]'>18</div>
+      <div class="calendar-day" data-day="19" data-events='[]'>19</div>
+      <div class="calendar-day" data-day="20" data-events='[]'>20</div>
+      <div class="calendar-day" data-day="21" data-events='[]'>21</div>
+      <div class="calendar-day" data-day="22" data-events='[]'>22</div>
+      <div class="calendar-day" data-day="23" data-events='[]'>23</div>
+      <div class="calendar-day" data-day="24" data-events='[]'>24</div>
+      <div class="calendar-day" data-day="25" data-events='[]'>25</div>
+      <div class="calendar-day" data-day="26" data-events='[]'>26</div>
+      <div class="calendar-day" data-day="27" data-events='[]'>27</div>
+      <div class="calendar-day" data-day="28" data-events='[]'>28</div>
+      <div class="calendar-day" data-day="29" data-events='[]'>29</div>
+      <div class="calendar-day" data-day="30" data-events='[]'>30</div>
+      <div class="calendar-day" data-day="31" data-events='[]'>31</div>
+      <div class="calendar-day empty"></div>
+      <div class="calendar-day empty"></div>
+      <div class="calendar-day empty"></div>
+      <div class="calendar-day empty"></div>
+      <div class="calendar-day empty"></div>
+    </div>
+    <div class="calendar-legend">
+      <span class="legend-item"><span class="legend-dot legend-exam"></span> Examen</span>
+      <span class="legend-item"><span class="legend-dot legend-class"></span> Clase</span>
+      <span class="legend-item"><span class="legend-dot legend-personal"></span> Personal</span>
+    </div>
+  </section>
+
+  <section class="upcoming-section">
+    <h3 class="section-subtitle">Próximos Eventos</h3>
+    <div class="events-list">
+      <div class="event-card event-exam">
+        <div class="event-date">
+          <span class="event-day">12</span>
+          <span class="event-month">Abr</span>
+        </div>
+        <div class="event-content">
+          <span class="event-type">Parcial</span>
+          <h4 class="event-title">Programación Multimedial II</h4>
+          <p class="event-detail">Aula 402 · 10:00 hs</p>
+        </div>
+      </div>
+      <div class="event-card event-exam">
+        <div class="event-date">
+          <span class="event-day">18</span>
+          <span class="event-month">Abr</span>
+        </div>
+        <div class="event-content">
+          <span class="event-type">Parcial</span>
+          <h4 class="event-title">Producción Audiovisual</h4>
+          <p class="event-detail">Lab. de Video · 18:30 hs</p>
+        </div>
+      </div>
+      <div class="event-card event-class">
+        <div class="event-date">
+          <span class="event-day">15</span>
+          <span class="event-month">Abr</span>
+        </div>
+        <div class="event-content">
+          <span class="event-type">Clase</span>
+          <h4 class="event-title">Arte Digital I</h4>
+          <p class="event-detail">Aula 301 · 18:30 hs</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="academic-dates-section">
+    <h3 class="section-subtitle">Fechas Académicas</h3>
+    <div class="dates-list">
+      <div class="date-item">
+        <span class="date-label">Inicio de Cursadas 1er Cuatrimestre</span>
+        <span class="date-value">17 Mar 2026</span>
+      </div>
+      <div class="date-item">
+        <span class="date-label">Feriado - Semana Santa</span>
+        <span class="date-value">17-20 Abr 2026</span>
+      </div>
+      <div class="date-item">
+        <span class="date-label">Primer Parcial</span>
+        <span class="date-value">7-19 Abr 2026</span>
+      </div>
+      <div class="date-item">
+        <span class="date-label">Segundo Parcial</span>
+        <span class="date-value">2-14 Jun 2026</span>
+      </div>
+      <div class="date-item">
+        <span class="date-label">Receso Invernal</span>
+        <span class="date-value">14-25 Jul 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="day-details-overlay" id="dayDetailsOverlay">
+    <div class="day-details-modal">
+      <div class="day-details-header">
+        <h3 class="day-details-title" id="dayDetailsTitle">8 de Abril</h3>
+        <button class="day-details-close" id="dayDetailsClose">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="day-events-list" id="dayEventsList"></div>
+    </div>
+  </div>
+
+  <div class="add-event-overlay" id="addEventOverlay">
+    <div class="add-event-modal">
+      <div class="add-event-header">
+        <h3 class="add-event-title">Agregar Evento Personal</h3>
+        <button class="add-event-close" id="addEventClose">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="add-event-body">
+        <div class="form-group">
+          <label class="form-label">Título del evento</label>
+          <input type="text" class="form-input" id="eventTitle" placeholder="Ej: Estudio grupal">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Fecha</label>
+            <input type="date" class="form-input" id="eventDate">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Hora</label>
+            <input type="time" class="form-input" id="eventTime">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Descripción (opcional)</label>
+          <textarea class="form-textarea" id="eventDescription" rows="3" placeholder="Agregar detalles..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Color</label>
+          <div class="color-options">
+            <button class="color-option color-blue active" data-color="blue"></button>
+            <button class="color-option color-green" data-color="green"></button>
+            <button class="color-option color-orange" data-color="orange"></button>
+            <button class="color-option color-purple" data-color="purple"></button>
+            <button class="color-option color-red" data-color="red"></button>
+          </div>
+        </div>
+      </div>
+      <div class="add-event-footer">
+        <button class="btn btn-secondary" id="cancelAddEvent">Cancelar</button>
+        <button class="btn btn-primary" id="saveEvent">Guardar Evento</button>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

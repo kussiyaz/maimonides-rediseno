@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getAlumnoById } from '../utils/db';
+
+const alumno = getAlumnoById("660a1b2c3d4e5f6a7b8c9d01");
+const materias = alumno.materias;
+
+const materiasCursando = materias.filter(m => m.estado === "cursando");
+const materiasAprobadas = materias.filter(m => m.estado === "aprobada");
+const materiasPendientes = materias.filter(m => m.estado === "regular" || m.estado === "pendiente");
+
+const slugify = (s) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const ordinal = (n) => n === 1 ? '1er' : n === 2 ? '2do' : n === 3 ? '3er' : n + '°';
+
+const gradients = [
+  'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)',
+  'linear-gradient(135deg, #06B6D4 0%, #0891B2 100%)',
+  'linear-gradient(135deg, #F97316 0%, #EA580C 100%)',
+  'linear-gradient(135deg, #84CC16 0%, #65A30D 100%)',
+  'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
+  'linear-gradient(135deg, #EC4899 0%, #BE185D 100%)',
+  'linear-gradient(135deg, #14B8A6 0%, #0D9488 100%)',
+  'linear-gradient(135deg, #6366F1 0%, #4F46E5 100%)',
+];
+---
+
+<BaseLayout title="Materias" pageTitle="Materias" activeNav="materias" sidebarActive="materias" studentName={`${alumno.nombre} ${alumno.apellido}`} studentAvatar={`https://i.pravatar.cc/200?u=${alumno._id.$oid}`} studentCareer={alumno.carrera} studentId="1">
+  <section class="filter-section">
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="cursando">Cursando ({materiasCursando.length})</button>
+      <button class="filter-tab" data-filter="aprobadas">Aprobadas ({materiasAprobadas.length})</button>
+      <button class="filter-tab" data-filter="pendientes">Pendientes ({materiasPendientes.length})</button>
+    </div>
+  </section>
+
+  <section class="courses-section" id="cursando-section">
+    <h2 class="section-title">{ordinal(alumno.anioCursada)} Año - Cursando</h2>
+    <div class="courses-grid">
+      {materiasCursando.map((m, i) => (
+        <a href={`/materias/${slugify(m.nombre)}`} class={`course-card${i === 0 ? ' course-card-featured' : ''}`}>
+          <div class="course-header">
+            <div class="course-icon" style={`background: ${gradients[i % gradients.length]};`}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <span class="course-badge course-badge-active">Cursando</span>
+          </div>
+          <h3 class="course-title">{m.nombre}</h3>
+          <p class="course-teacher">{m.profesor}</p>
+          <div class="course-progress">
+            <div class="progress-info">
+              <span class="progress-label">Progreso</span>
+              <span class="progress-value">{m.progreso}%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style={`width: ${m.progreso}%;`}></div></div>
+            <span class="progress-detail">{m.unidadesCompletadas} de {m.unidadesTotales} unidades</span>
+          </div>
+          {m.horario && (
+            <div class="course-meta">
+              <span class="meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>{m.horario}</span>
+            </div>
+          )}
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="courses-section" id="aprobadas-section" style="display: none;">
+    <h2 class="section-title">Materias Aprobadas</h2>
+    <div class="approved-materias-list">
+      {materiasAprobadas.map(m => (
+        <div class="approved-materia-item">
+          <div class="approved-materia-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <div class="approved-materia-info">
+            <span class="approved-materia-name">{m.nombre}</span>
+            <span class="approved-materia-year">{ordinal(m.anio)} Año · {m.fechaAprobacion?.split('-')[0] || '-'}</span>
+          </div>
+          <span class="approved-materia-grade">{m.nota}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="courses-section" id="pendientes-section" style="display: none;">
+    <h2 class="section-title">Materias Pendientes</h2>
+    <div class="pending-materias-list">
+      {materiasPendientes.map(m => (
+        <div class="pending-materia-item">
+          <div class="materia-info">
+            <span class="materia-name">{m.nombre}</span>
+            <span class="materia-year">{ordinal(m.anio)} Año</span>
+          </div>
+          <span class="materia-status status-pending">Pendiente</span>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
