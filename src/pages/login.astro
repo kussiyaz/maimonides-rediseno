@@ -367,9 +367,16 @@ const pageTitle = '';
             var errTxt = document.getElementById('loginErrorText');
             var pw = document.getElementById('password');
             var tog = document.getElementById('togglePassword');
-            if (!f || !errBox || !errTxt || !pw || !tog) {
+            var chk = document.getElementById('remember');
+            var userInput = document.getElementById('username');
+            if (!f || !errBox || !errTxt || !pw || !tog || !chk || !userInput) {
                 console.error('Login: faltan elementos');
                 return;
+            }
+            var saved = localStorage.getItem('recordar_usuario');
+            if (saved) {
+                userInput.value = saved;
+                chk.checked = true;
             }
             function showError(m) {
                 errTxt.textContent = m;
@@ -388,11 +395,16 @@ const pageTitle = '';
             f.addEventListener('submit', function(e){
                 e.preventDefault();
                 hideError();
-                var u = document.getElementById('username').value.trim();
+                var u = userInput.value.trim();
                 var p = pw.value;
                 if (!u || !p) {
                     showError('Complet\u00e1 usuario y contrase\u00f1a');
                     return;
+                }
+                if (chk.checked) {
+                    localStorage.setItem('recordar_usuario', u);
+                } else {
+                    localStorage.removeItem('recordar_usuario');
                 }
                 var x = new XMLHttpRequest();
                 x.open('POST', '/api/login', true);

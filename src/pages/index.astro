@@ -3,6 +3,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="Dashboard" pageTitle="Licenciatura en Tecnología Multimedial" activeNav="inicio" sidebarActive="inicio">
+  <script is:inline>
+    (function(){
+      if (!sessionStorage.getItem('usuario')) {
+        window.location.href = '/login';
+      }
+    })();
+  </script>
   <section class="welcome-section">
     <div class="welcome-card">
       <div class="welcome-content">
