@@ -359,21 +359,18 @@ const pageTitle = '';
             Navegadores recomendados: Chrome, Firefox, Edge o Safari (versión actual)
         </p>
     </div>
-    <script>
+    <script is:inline>
         var errorEl = document.getElementById('loginError');
         var errorText = document.getElementById('loginErrorText');
         var passwordInput = document.getElementById('password');
         var toggleBtn = document.getElementById('togglePassword');
-
         function showError(msg) {
             errorText.textContent = msg;
             errorEl.classList.add('visible');
         }
-
         function hideError() {
             errorEl.classList.remove('visible');
         }
-
         toggleBtn.addEventListener('click', function() {
             var isPassword = passwordInput.type === 'password';
             passwordInput.type = isPassword ? 'text' : 'password';
@@ -382,28 +379,27 @@ const pageTitle = '';
                 : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
             toggleBtn.setAttribute('aria-label', isPassword ? 'Ocultar contraseña' : 'Mostrar contraseña');
         });
-
         document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             hideError();
             var usuario = document.getElementById('username').value.trim();
             var contrasena = passwordInput.value;
             if (!usuario || !contrasena) {
-                showError('Completá usuario y contraseña');
+                showError('Complet\u00e1 usuario y contrase\u00f1a');
                 return;
             }
             try {
                 var res = await fetch('/api/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ usuario, contrasena }),
+                    body: JSON.stringify({ usuario: usuario, contrasena: contrasena }),
                 });
                 var text = await res.text();
                 if (!res.ok) {
                     try {
                         var err = JSON.parse(text);
-                        showError(err.error || 'Error al iniciar sesión');
-                    } catch {
+                        showError(err.error || 'Error al iniciar sesi\u00f3n');
+                    } catch (e2) {
                         showError('Error del servidor (' + res.status + ')');
                     }
                     return;
@@ -412,7 +408,7 @@ const pageTitle = '';
                 sessionStorage.setItem('usuario', JSON.stringify(data));
                 window.location.href = '/';
             } catch (err) {
-                showError('Error de conexión. Verificá tu internet.');
+                showError('Error de conexi\u00f3n. Verific\u00e1 tu internet.');
             }
         });
     </script>
