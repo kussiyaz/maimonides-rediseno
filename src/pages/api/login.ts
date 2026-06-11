@@ -11,6 +11,8 @@ const alumnoSchema = new mongoose.Schema({
   usuario:        { type: String, unique: true },
   contrasena:     String,
   nombre_completo: String,
+  nombre_corto:   String,
+  foto_url:       String,
   materias:       [materiaSchema],
 });
 
@@ -51,7 +53,10 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     return new Response(JSON.stringify({
+      usuario: alumno.usuario,
       nombre_completo: alumno.nombre_completo,
+      nombre_corto: alumno.nombre_corto,
+      foto_url: alumno.foto_url,
       materias: alumno.materias,
     }), {
       status: 200,

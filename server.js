@@ -29,6 +29,8 @@ const alumnosSeed = [
     usuario: 'yazmin',
     contrasena: 'alumno123',
     nombre_completo: 'Yazmin Kussi',
+    nombre_corto: 'Yazmin',
+    foto_url: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face',
     materias: [
       { nombre: 'Matemática I',     nota: 9,  estado: 'Aprobado' },
       { nombre: 'Programación I',   nota: 10, estado: 'Aprobado' },
@@ -40,6 +42,8 @@ const alumnosSeed = [
     usuario: 'camila',
     contrasena: 'alumno123',
     nombre_completo: 'Camila Gómez',
+    nombre_corto: 'Camila',
+    foto_url: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face',
     materias: [
       { nombre: 'Matemática II',    nota: 6,  estado: 'Cursando' },
       { nombre: 'Programación II',  nota: 9,  estado: 'Aprobado' },
@@ -51,6 +55,8 @@ const alumnosSeed = [
     usuario: 'lucas',
     contrasena: 'alumno123',
     nombre_completo: 'Lucas Fernández',
+    nombre_corto: 'Lucas',
+    foto_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face',
     materias: [
       { nombre: 'Programación I',   nota: 7,  estado: 'Cursando' },
       { nombre: 'Álgebra',          nota: 5,  estado: 'Recuperatorio' },
@@ -62,6 +68,8 @@ const alumnosSeed = [
     usuario: 'luciano',
     contrasena: 'alumno123',
     nombre_completo: 'Luciano Martínez',
+    nombre_corto: 'Luciano',
+    foto_url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face',
     materias: [
       { nombre: 'Matemática I',     nota: 10, estado: 'Aprobado' },
       { nombre: 'Física I',         nota: 9,  estado: 'Aprobado' },
@@ -69,64 +77,11 @@ const alumnosSeed = [
     ],
   },
   {
-    usuario: 'karen',
-    contrasena: 'alumno123',
-    nombre_completo: 'Karen Torres',
-    materias: [
-      { nombre: 'Base de Datos',    nota: 9,  estado: 'Aprobado' },
-      { nombre: 'Redes',            nota: 7,  estado: 'Cursando' },
-      { nombre: 'Sistemas Operativos', nota: 5, estado: 'Recuperatorio' },
-      { nombre: 'Ética Profesional', nota: 8,  estado: 'Aprobado' },
-    ],
-  },
-  {
-    usuario: 'tamara',
-    contrasena: 'alumno123',
-    nombre_completo: 'Tamara Díaz',
-    materias: [
-      { nombre: 'Matemática II',    nota: 8,  estado: 'Aprobado' },
-      { nombre: 'Programación I',   nota: 9,  estado: 'Aprobado' },
-      { nombre: 'Física II',        nota: 6,  estado: 'Cursando' },
-      { nombre: 'Redes',            nota: 4,  estado: 'Recuperatorio' },
-    ],
-  },
-  {
-    usuario: 'facundo',
-    contrasena: 'alumno123',
-    nombre_completo: 'Facundo Ruiz',
-    materias: [
-      { nombre: 'Álgebra',          nota: 7,  estado: 'Cursando' },
-      { nombre: 'Programación II',  nota: 6,  estado: 'Cursando' },
-      { nombre: 'Base de Datos',    nota: 8,  estado: 'Aprobado' },
-      { nombre: 'Inglés Técnico',   nota: 5,  estado: 'Recuperatorio' },
-    ],
-  },
-  {
-    usuario: 'dahiana',
-    contrasena: 'alumno123',
-    nombre_completo: 'Dahiana Mendoza',
-    materias: [
-      { nombre: 'Matemática I',     nota: 9,  estado: 'Aprobado' },
-      { nombre: 'Programación I',   nota: 10, estado: 'Aprobado' },
-      { nombre: 'Física I',         nota: 8,  estado: 'Aprobado' },
-      { nombre: 'Sistemas Operativos', nota: 7, estado: 'Cursando' },
-    ],
-  },
-  {
-    usuario: 'franco',
-    contrasena: 'alumno123',
-    nombre_completo: 'Franco Castillo',
-    materias: [
-      { nombre: 'Redes',            nota: 6,  estado: 'Cursando' },
-      { nombre: 'Programación I',   nota: 5,  estado: 'Recuperatorio' },
-      { nombre: 'Matemática II',    nota: 7,  estado: 'Cursando' },
-      { nombre: 'Química',          nota: 4,  estado: 'Recuperatorio' },
-    ],
-  },
-  {
     usuario: 'melina',
     contrasena: 'alumno123',
     nombre_completo: 'Melina Rivas',
+    nombre_corto: 'Melina',
+    foto_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop&crop=face',
     materias: [
       { nombre: 'Base de Datos',    nota: 10, estado: 'Aprobado' },
       { nombre: 'Programación II',  nota: 9,  estado: 'Aprobado' },
