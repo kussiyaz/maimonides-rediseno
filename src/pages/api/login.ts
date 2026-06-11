@@ -1,22 +1,5 @@
 import type { APIRoute } from 'astro';
-import mongoose from 'mongoose';
-
-const materiaSchema = new mongoose.Schema({
-  nombre: String,
-  nota: Number,
-  estado: { type: String, enum: ['Aprobado', 'Cursando', 'Recuperatorio'] },
-}, { _id: false });
-
-const alumnoSchema = new mongoose.Schema({
-  usuario:        { type: String, unique: true },
-  contrasena:     String,
-  nombre_completo: String,
-  nombre_corto:   String,
-  foto_url:       String,
-  materias:       [materiaSchema],
-});
-
-const Alumno = mongoose.models.Alumno || mongoose.model('Alumno', alumnoSchema);
+import { connectDB, Alumno } from '../../lib/mongodb';
 
 export const prerender = false;
 
@@ -105,10 +88,7 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   try {
-    if (mongoose.connection.readyState !== 1) {
-      await mongoose.connect(MONGODB_URI);
-    }
-
+    await connectDB();
     await seed();
 
     const body = await request.json();
