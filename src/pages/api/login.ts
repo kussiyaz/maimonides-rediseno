@@ -141,7 +141,8 @@ export const POST: APIRoute = async ({ request }) => {
     });
   } catch (err) {
     console.error('Error en login:', err);
-    return new Response(JSON.stringify({ error: 'Error interno del servidor' }), {
+    const errorMessage = (err instanceof Error) ? err.message : 'Error interno del servidor';
+    return new Response(JSON.stringify({ error: errorMessage }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
