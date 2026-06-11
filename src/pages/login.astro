@@ -316,7 +316,7 @@ const pageTitle = '';
         <div class="login-card">
             <img src="https://www.maimonides.edu/wp-content/uploads/2022/02/logos_300x55_original-400x74.png" alt="UMAI" class="login-logo">
             <h2 class="login-title">Ingresá a tu cuenta</h2>
-            <form id="loginForm">
+            <form id="loginForm" novalidate>
                 <div class="login-error" id="loginError">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
@@ -360,57 +360,62 @@ const pageTitle = '';
         </p>
     </div>
     <script is:inline>
-        var errorEl = document.getElementById('loginError');
-        var errorText = document.getElementById('loginErrorText');
-        var passwordInput = document.getElementById('password');
-        var toggleBtn = document.getElementById('togglePassword');
-        function showError(msg) {
-            errorText.textContent = msg;
-            errorEl.classList.add('visible');
-        }
-        function hideError() {
-            errorEl.classList.remove('visible');
-        }
-        toggleBtn.addEventListener('click', function() {
-            var isPassword = passwordInput.type === 'password';
-            passwordInput.type = isPassword ? 'text' : 'password';
-            toggleBtn.innerHTML = isPassword
-                ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
-                : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
-            toggleBtn.setAttribute('aria-label', isPassword ? 'Ocultar contraseña' : 'Mostrar contraseña');
-        });
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            hideError();
-            var usuario = document.getElementById('username').value.trim();
-            var contrasena = passwordInput.value;
-            if (!usuario || !contrasena) {
-                showError('Complet\u00e1 usuario y contrase\u00f1a');
+        (function(){
+            "use strict";
+            var f = document.getElementById('loginForm');
+            var errBox = document.getElementById('loginError');
+            var errTxt = document.getElementById('loginErrorText');
+            var pw = document.getElementById('password');
+            var tog = document.getElementById('togglePassword');
+            if (!f || !errBox || !errTxt || !pw || !tog) {
+                console.error('Login: faltan elementos');
                 return;
             }
-            try {
-                var res = await fetch('/api/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ usuario: usuario, contrasena: contrasena }),
-                });
-                var text = await res.text();
-                if (!res.ok) {
-                    try {
-                        var err = JSON.parse(text);
-                        showError(err.error || 'Error al iniciar sesi\u00f3n');
-                    } catch (e2) {
-                        showError('Error del servidor (' + res.status + ')');
-                    }
+            function showError(m) {
+                errTxt.textContent = m;
+                errBox.style.display = 'flex';
+            }
+            function hideError() {
+                errBox.style.display = 'none';
+            }
+            tog.addEventListener('click', function(){
+                var hide = pw.type === 'password';
+                pw.type = hide ? 'text' : 'password';
+                tog.innerHTML = hide
+                    ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
+                    : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+            });
+            f.addEventListener('submit', function(e){
+                e.preventDefault();
+                hideError();
+                var u = document.getElementById('username').value.trim();
+                var p = pw.value;
+                if (!u || !p) {
+                    showError('Complet\u00e1 usuario y contrase\u00f1a');
                     return;
                 }
-                var data = JSON.parse(text);
-                sessionStorage.setItem('usuario', JSON.stringify(data));
-                window.location.href = '/';
-            } catch (err) {
-                showError('Error de conexi\u00f3n. Verific\u00e1 tu internet.');
-            }
-        });
+                var x = new XMLHttpRequest();
+                x.open('POST', '/api/login', true);
+                x.setRequestHeader('Content-Type', 'application/json');
+                x.onreadystatechange = function(){
+                    if (x.readyState !== 4) return;
+                    if (x.status === 200) {
+                        try {
+                            var d = JSON.parse(x.responseText);
+                            sessionStorage.setItem('usuario', JSON.stringify(d));
+                            window.location.href = '/';
+                        } catch(e) { showError('Error al procesar respuesta'); }
+                    } else {
+                        try {
+                            var d = JSON.parse(x.responseText);
+                            showError(d.error || 'Error al iniciar sesi\u00f3n');
+                        } catch(e) { showError('Error del servidor (' + x.status + ')'); }
+                    }
+                };
+                x.onerror = function(){ showError('Error de conexi\u00f3n.'); };
+                x.send(JSON.stringify({ usuario: u, contrasena: p }));
+            });
+        })();
     </script>
 </body>
 </html>
