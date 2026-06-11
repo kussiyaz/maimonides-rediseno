@@ -291,26 +291,42 @@ const pageTitle = '';
         </p>
     </div>
     <script>
+        console.log('Login page loaded');
         document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
+            console.log('Form submit prevented');
             const usuario = document.getElementById('username').value.trim();
             const contrasena = document.getElementById('password').value;
-            if (!usuario || !contrasena) return;
+            console.log('Credentials:', usuario ? 'filled' : 'empty', contrasena ? 'filled' : 'empty');
+            if (!usuario || !contrasena) {
+                alert('Completá usuario y contraseña');
+                return;
+            }
             try {
+                console.log('Fetching /api/login...');
                 const res = await fetch('/api/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ usuario, contrasena }),
                 });
+                console.log('Response status:', res.status);
+                const text = await res.text();
+                console.log('Response body:', text);
                 if (!res.ok) {
-                    const err = await res.json();
-                    alert(err.error || 'Error al iniciar sesión');
+                    try {
+                        const err = JSON.parse(text);
+                        alert(err.error || 'Error al iniciar sesión');
+                    } catch {
+                        alert('Error del servidor: ' + res.status);
+                    }
                     return;
                 }
-                const data = await res.json();
+                const data = JSON.parse(text);
+                console.log('Login ok, storing session...');
                 sessionStorage.setItem('usuario', JSON.stringify(data));
                 window.location.href = '/';
-            } catch {
+            } catch (err) {
+                console.error('Fetch error:', err);
                 alert('Error de conexión. Intentalo de nuevo.');
             }
         });
